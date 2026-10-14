@@ -1,19 +1,50 @@
-# Pure.Template
+# Pure.RelationalSchema.Storage.PostgreSQL.Abstractions
 
-Project template for new **Pure** ecosystem NuGet libraries.
+PostgreSQL-specific storage abstractions for the **Pure** relational schema ecosystem — an `IStoredSchemaDataSet` that carries its `IDbConnection`.
 
+[![.NET build & check](https://github.com/kudima03/Pure.RelationalSchema.Storage.PostgreSQL.Abstractions/actions/workflows/build-and-check.yml/badge.svg?branch=main)](https://github.com/kudima03/Pure.RelationalSchema.Storage.PostgreSQL.Abstractions/actions/workflows/build-and-check.yml)
+[![Build and Deploy](https://github.com/kudima03/Pure.RelationalSchema.Storage.PostgreSQL.Abstractions/actions/workflows/publish-nuget.yml/badge.svg?branch=main)](https://github.com/kudima03/Pure.RelationalSchema.Storage.PostgreSQL.Abstractions/actions/workflows/publish-nuget.yml)
+[![NuGet](https://img.shields.io/nuget/v/Pure.RelationalSchema.Storage.PostgreSQL.Abstractions)](https://www.nuget.org/packages/Pure.RelationalSchema.Storage.PostgreSQL.Abstractions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Overview
 
-`Pure.Template` is the canonical starting point for new Pure ecosystem packages. It ships with a pre-configured project structure, `.editorconfig`, GitHub Actions workflows for build/test and NuGet publish, and standard `CODEOWNERS` and `CODE_OF_CONDUCT.md` files — so a new library can be bootstrapped consistently without manually copying configuration from another repo.
+`Pure.RelationalSchema.Storage.PostgreSQL.Abstractions` contains the one PostgreSQL-specific contract shared by the PostgreSQL storage packages. It lives in its own interfaces-only package so that the package that implements it and the packages that consume it depend on a small, stable abstraction instead of on each other.
 
-## What's included
+## Public API
 
-| Item | Description |
-|------|-------------|
-| `.editorconfig` | Shared code style rules for the Pure ecosystem |
-| `CODEOWNERS` | Default ownership configuration |
-| `CODE_OF_CONDUCT.md` | Contributor code of conduct |
-| `.github/workflows/build-and-test.yml` | CI workflow: restore, build, and test on every push |
-| `.github/workflows/publish-nuget.yml` | Publish workflow: triggered on git tag push |
+| Name | Namespace | Description |
+|------|-----------|-------------|
+| `IPostgreSqlStoredSchemaDataSet` | `Pure.RelationalSchema.Storage.PostgreSQL.Abstractions` | An `IStoredSchemaDataSet` that also exposes the `IDbConnection Connection` it reads from |
+
+### Who implements and who consumes it
+
+- **Implemented by** `PostgreSqlStoredSchemaDataSet` in `Pure.RelationalSchema.Storage.PostgreSQL.Querying`.
+- **Consumed by** `PostgreSqlStoredSchemaDataSetWithInsertedRows` in `Pure.RelationalSchema.Storage.PostgreSQL.Insertion`, which uses the connection to insert rows into the same database.
+
+## Design Principles
+
+- **Interfaces-only** — no implementations, no tests; every file defines exactly one interface
+- **AOT-compatible** — `IsAotCompatible=true`
+
+## Dependencies
+
+- [`Pure.RelationalSchema.Storage.Abstractions`](https://github.com/kudima03/Pure.RelationalSchema.Storage.Abstractions/tree/0.1.0-preview.4.1.0) — `IStoredSchemaDataSet` and the other storage interfaces
+
+## Target Frameworks
+
+- .NET 8
+- .NET 9
+- .NET 10
+
+## Installation
+
+```
+dotnet add package Pure.RelationalSchema.Storage.PostgreSQL.Abstractions
+```
+
+## Related packages
+
+- `Pure.RelationalSchema.Storage.PostgreSQL.Creation` — creates the schema and tables
+- `Pure.RelationalSchema.Storage.PostgreSQL.Querying` — reads rows; implements `IPostgreSqlStoredSchemaDataSet`
+- `Pure.RelationalSchema.Storage.PostgreSQL.Insertion` — inserts rows; consumes `IPostgreSqlStoredSchemaDataSet`
