@@ -33,6 +33,7 @@ PostgreSQL-specific storage abstractions for the **Pure** relational schema ecos
 
 ## Target Frameworks
 
+- .NET 7
 - .NET 8
 - .NET 9
 - .NET 10

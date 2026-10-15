@@ -29,7 +29,7 @@ This is an **interfaces-only NuGet library** — no implementations, no tests. E
 
 It is implemented by `PostgreSqlStoredSchemaDataSet` in `Pure.RelationalSchema.Storage.PostgreSQL.Querying` and consumed by `Pure.RelationalSchema.Storage.PostgreSQL.Insertion`.
 
-**Multi-targeting:** net8.0, net9.0, net10.0. All interfaces must remain AOT-compatible (`IsAotCompatible=true`).
+**Multi-targeting:** net7.0, net8.0, net9.0, net10.0. All interfaces must remain AOT-compatible (`IsAotCompatible=true`).
 
 **Package validation:** `EnablePackageValidation = true`. There is no `PackageValidationBaselineVersion` until the first release; set it afterwards. Breaking API changes then fail the build.
 
