@@ -9,13 +9,14 @@ PostgreSQL-specific storage abstractions for the **Pure** relational schema ecos
 
 ## Overview
 
-`Pure.RelationalSchema.Storage.PostgreSQL.Abstractions` contains the one PostgreSQL-specific contract shared by the PostgreSQL storage packages. It lives in its own interfaces-only package so that the package that implements it and the packages that consume it depend on a small, stable abstraction instead of on each other.
+`Pure.RelationalSchema.Storage.PostgreSQL.Abstractions` contains the PostgreSQL-specific contract shared by the PostgreSQL storage packages, plus the `TrimmedHash` helper. It lives in its own package so that the package that implements it and the packages that consume it depend on a small, stable abstraction instead of on each other.
 
 ## Public API
 
 | Name | Namespace | Description |
 |------|-----------|-------------|
 | `IPostgreSqlStoredSchemaDataSet` | `Pure.RelationalSchema.Storage.PostgreSQL.Abstractions` | An `IStoredSchemaDataSet` that also exposes the `IDbConnection Connection` it reads from |
+| `TrimmedHash` | `Pure.RelationalSchema.Storage.PostgreSQL.Abstractions` | An `IString` that truncates a source hash to 63 characters, the PostgreSQL identifier length limit |
 
 ### Who implements and who consumes it
 
@@ -24,11 +25,12 @@ PostgreSQL-specific storage abstractions for the **Pure** relational schema ecos
 
 ## Design Principles
 
-- **Interfaces-only** — no implementations, no tests; every file defines exactly one interface
+- **Interfaces plus one helper** — `IPostgreSqlStoredSchemaDataSet` is the only interface; `TrimmedHash` is the only implementation; no tests
 - **AOT-compatible** — `IsAotCompatible=true`
 
 ## Dependencies
 
+- [`Pure.Primitives`](https://www.nuget.org/packages/Pure.Primitives), [`Pure.Primitives.Abstractions`](https://www.nuget.org/packages/Pure.Primitives.Abstractions) and [`Pure.Primitives.String.Operations`](https://www.nuget.org/packages/Pure.Primitives.String.Operations) — `IString` and the primitives `TrimmedHash` is built from
 - [`Pure.RelationalSchema.Storage.Abstractions`](https://github.com/kudima03/Pure.RelationalSchema.Storage.Abstractions/tree/0.1.0-preview.4.1.0) — `IStoredSchemaDataSet` and the other storage interfaces
 
 ## Target Frameworks

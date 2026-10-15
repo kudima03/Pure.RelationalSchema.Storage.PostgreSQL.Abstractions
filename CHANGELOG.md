@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `net7.0` target framework.
+- `TrimmedHash` — an `IString` that truncates a hash to 63 characters, the PostgreSQL identifier length limit. Moved from `Pure.RelationalSchema.Storage.PostgreSQL.Insertion`.
 
 ## [0.1.0-preview.0.1.0] — 2026-10-14
 

@@ -21,13 +21,15 @@ There are no test or benchmark projects — the CI pipeline (`build-and-check.ym
 
 ## Architecture
 
-This is an **interfaces-only NuGet library** — no implementations, no tests. Every file defines exactly one interface.
+This is a **NuGet library that is almost entirely interfaces** — no tests. Every file defines exactly one type: the interface below plus the `TrimmedHash` helper.
 
 **Interface:**
 
 - `IPostgreSqlStoredSchemaDataSet` — extends `IStoredSchemaDataSet` (from `Pure.RelationalSchema.Storage.Abstractions`, a read-only dictionary of `ITable` → `IStoredTableDataSet` that carries its `ISchema`) and adds `IDbConnection Connection`.
 
-It is implemented by `PostgreSqlStoredSchemaDataSet` in `Pure.RelationalSchema.Storage.PostgreSQL.Querying` and consumed by `Pure.RelationalSchema.Storage.PostgreSQL.Insertion`.
+`TrimmedHash` is a public `IString` record that truncates a hash to 63 characters (the PostgreSQL identifier limit). It was moved here from `Pure.RelationalSchema.Storage.PostgreSQL.Insertion`.
+
+The interface is implemented by `PostgreSqlStoredSchemaDataSet` in `Pure.RelationalSchema.Storage.PostgreSQL.Querying` and consumed by `Pure.RelationalSchema.Storage.PostgreSQL.Insertion`.
 
 **Multi-targeting:** net7.0, net8.0, net9.0, net10.0. All interfaces must remain AOT-compatible (`IsAotCompatible=true`).
 

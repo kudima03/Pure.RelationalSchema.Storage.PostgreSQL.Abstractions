@@ -18,6 +18,9 @@
     <PackageProjectUrl>https://github.com/kudima03/Pure.RelationalSchema.Storage.PostgreSQL.Abstractions</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Pure.Primitives" Version="3.6.5" />
+    <PackageReference Include="Pure.Primitives.Abstractions" Version="4.3.0" />
+    <PackageReference Include="Pure.Primitives.String.Operations" Version="1.5.1" />
     <PackageReference
       Include="Pure.RelationalSchema.Storage.Abstractions"
       Version="0.1.0-preview.4.1.0"
