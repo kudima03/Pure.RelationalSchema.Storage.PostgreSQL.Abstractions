@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0-preview.0.2.0] — 2026-11-11
+
 ### Added
 
-- `net7.0` target framework.
+- `net7.0` and `net11.0` target frameworks.
+
+### Changed
+
+- Update `Pure.RelationalSchema.Storage.Abstractions` to `0.1.0-preview.4.2.0`.
 
 ## [0.1.0-preview.0.1.0] — 2026-10-14
 
