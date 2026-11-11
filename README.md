@@ -37,6 +37,7 @@ PostgreSQL-specific storage abstractions for the **Pure** relational schema ecos
 - .NET 8
 - .NET 9
 - .NET 10
+- .NET 11
 
 ## Installation
 
